@@ -20,7 +20,7 @@ import middlegen.plugins.iwallet.util.SqlParser;
 
 import org.apache.commons.lang.StringUtils;
 
-import Zql.ZSelectItem;
+import org.gibello.zql.ZSelectItem;
 
 import com.atom.dalgen.utils.CfgUtils;
 import com.atom.dalgen.utils.LogUtils;
@@ -33,41 +33,41 @@ import com.atom.dalgen.utils.LogUtils;
  * @version $Id: IWalletOperation.java,v 1.2 2005/05/25 06:09:15 lusu Exp $
  */
 public abstract class IWalletOperation extends PreferenceAware implements Operation {
-    public static final String       MAPPED_STATEMENT_PREFIX = "";
-    public static final String       PARAM_TYPE_OBJECT       = "object";
-    public static final String       PARAM_TYPE_PRIMITIVE    = "primitive";
-    public static final String       MULTIPLICITY_ONE        = "one";
-    public static final String       MULTIPLICITY_MANY       = "many";
-    //add by yuanxiao 2011-11-23----
-    public static final String       COUNT_TRUE              = "true";
-    public static final String       COUNT_FALSE             = "false";
+    public static final String MAPPED_STATEMENT_PREFIX = "";
+    public static final String PARAM_TYPE_OBJECT = "object";
+    public static final String PARAM_TYPE_PRIMITIVE = "primitive";
+    public static final String MULTIPLICITY_ONE = "one";
+    public static final String MULTIPLICITY_MANY = "many";
+    // add by yuanxiao 2011-11-23----
+    public static final String COUNT_TRUE = "true";
+    public static final String COUNT_FALSE = "false";
 
     /** an operation config instance holds operation configuration. */
     protected IWalletOperationConfig opConfig;
 
     /** the table instance */
-    private Table                    table;
+    private Table table;
 
     /**
      * a list of all method parameters, each one is an instance of IWalletParameter
      */
-    protected List<IWalletParameter> objectParams            = new ArrayList<IWalletParameter>();
+    protected List<IWalletParameter> objectParams = new ArrayList<IWalletParameter>();
 
     /**
      * a list of all method parameters, each one is an instance of IWalletParameter
      */
-    protected List<IWalletParameter> primitiveParams         = new ArrayList<IWalletParameter>();
+    protected List<IWalletParameter> primitiveParams = new ArrayList<IWalletParameter>();
 
     /** the type of how to pass parameters to dao */
-    protected String                 paramType;
+    protected String paramType;
 
     /** the multiplicity of results */
-    protected String                 multiplicity;
+    protected String multiplicity;
 
-    //add by yuanxiao 2011-11-23---
-    protected String                 count;
+    // add by yuanxiao 2011-11-23---
+    protected String count;
 
-    protected String                 parameterClass;
+    protected String parameterClass;
 
     /**
      * Constructor for IWalletOperation.
@@ -136,7 +136,7 @@ public abstract class IWalletOperation extends PreferenceAware implements Operat
      * 
      * @see middlegen.plugins.iwallet.Operation#getParsedSql()
      */
-    public String getParsedSql( ) {
+    public String getParsedSql() {
         return opConfig.getZst().toString();
     }
 
@@ -187,7 +187,7 @@ public abstract class IWalletOperation extends PreferenceAware implements Operat
     public List getExceptions() {
         List list = new ArrayList();
 
-//        list.add(IWalletPlugin.DATA_ACCESS_EXCEPTION_CLASS);
+        // list.add(IWalletPlugin.DATA_ACCESS_EXCEPTION_CLASS);
 
         return list;
     }
@@ -219,7 +219,9 @@ public abstract class IWalletOperation extends PreferenceAware implements Operat
      */
     public String getMappedStatementId(boolean needAppName) {
         String appName = needAppName ? DalUtil.toUpperCaseWithDash(CfgUtils.getAppName()) + "-" : "";
-        return MAPPED_STATEMENT_PREFIX + appName + DalUtil.toUpperCaseWithDash(((IWalletTable) getTable()).getBaseClassName()) + "-" + DalUtil.toUpperCaseWithDash(getName());
+        return MAPPED_STATEMENT_PREFIX + appName
+                + DalUtil.toUpperCaseWithDash(((IWalletTable) getTable()).getBaseClassName()) + "-"
+                + DalUtil.toUpperCaseWithDash(getName());
     }
 
     /**
@@ -265,8 +267,8 @@ public abstract class IWalletOperation extends PreferenceAware implements Operat
             // if (sqlType != null && sqlType.length() > 0) {
             // paramName = paramName + ":" + sqlType;
             // }
-            
-            //拼装sql语句
+
+            // 拼装sql语句
             msSql.append("#").append(paramName).append("#");
 
             startIndex = endIndex + 1;
@@ -326,7 +328,8 @@ public abstract class IWalletOperation extends PreferenceAware implements Operat
     // added by yangyanzhao 2009-11-11
     public String addSqlAnnotation(String orgSql) {
         String idAnnotation = " ";
-        String[] searchStrs = new String[] { "select", "SELECT", "insert", "INSERT", "delete", "DELETE", "update", "UPDATE" };
+        String[] searchStrs = new String[] { "select", "SELECT", "insert", "INSERT", "delete", "DELETE", "update",
+                "UPDATE" };
         int startOperation = StringUtils.indexOfAny(orgSql, searchStrs);
         if (-1 != startOperation) {
             String operation = StringUtils.substring(orgSql, 0, startOperation + 6);
@@ -350,7 +353,7 @@ public abstract class IWalletOperation extends PreferenceAware implements Operat
         return multiplicity;
     }
 
-    //add by yuanxiao 2011-11-23---
+    // add by yuanxiao 2011-11-23---
     public String getCount() {
         return count;
     }
@@ -544,12 +547,13 @@ public abstract class IWalletOperation extends PreferenceAware implements Operat
                 String aggregateFunc = item.getAggregate();
 
                 if (LogUtils.get().isDebugEnabled()) {
-                    //  LogUtils.get().debug("The aggregate func is " + aggregateFunc);
+                    // LogUtils.get().debug("The aggregate func is " + aggregateFunc);
                 }
 
                 if (aggregateFunc.equalsIgnoreCase("COUNT")) {
                     return "long";
-                } else if (aggregateFunc.equalsIgnoreCase("SUM") || aggregateFunc.equalsIgnoreCase("AVG") || aggregateFunc.equalsIgnoreCase("MAX") || aggregateFunc.equalsIgnoreCase("MIN")) {
+                } else if (aggregateFunc.equalsIgnoreCase("SUM") || aggregateFunc.equalsIgnoreCase("AVG")
+                        || aggregateFunc.equalsIgnoreCase("MAX") || aggregateFunc.equalsIgnoreCase("MIN")) {
                     String columnName = item.getColumn();
                     int indexStart = columnName.indexOf("(");
                     int indexEnd = columnName.indexOf(")", indexStart);
@@ -557,7 +561,7 @@ public abstract class IWalletOperation extends PreferenceAware implements Operat
                     columnName = columnName.substring(indexStart + 1, indexEnd);
 
                     if (LogUtils.get().isDebugEnabled()) {
-                        //  LogUtils.get().debug("The column to be aggregated is " +
+                        // LogUtils.get().debug("The column to be aggregated is " +
                         // columnName + ".");
                     }
 
@@ -575,8 +579,8 @@ public abstract class IWalletOperation extends PreferenceAware implements Operat
     }
 
     /**
-    * 解决sqlmapping文件id显示不成功问题
-    */
+     * 解决sqlmapping文件id显示不成功问题
+     */
     public String getMappedStatementIdForCount() {
         boolean needAppName = true;
         return getMappedStatementId(needAppName) + "-COUNT-FOR-PAGING";

@@ -5,18 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import Zql.ParseException;
-import Zql.ZConstant;
-import Zql.ZDelete;
-import Zql.ZExp;
-import Zql.ZExpression;
-import Zql.ZFromItem;
-import Zql.ZInsert;
-import Zql.ZQuery;
-import Zql.ZSelectItem;
-import Zql.ZStatement;
-import Zql.ZUpdate;
-import Zql.ZqlParser;
+import org.gibello.zql.ParseException;
+import org.gibello.zql.ZConstant;
+import org.gibello.zql.ZDelete;
+import org.gibello.zql.ZExp;
+import org.gibello.zql.ZExpression;
+import org.gibello.zql.ZFromItem;
+import org.gibello.zql.ZInsert;
+import org.gibello.zql.ZQuery;
+import org.gibello.zql.ZSelectItem;
+import org.gibello.zql.ZStatement;
+import org.gibello.zql.ZUpdate;
+import org.gibello.zql.ZqlParser;
 
 import com.atom.dalgen.utils.LogUtils;
 
@@ -25,13 +25,13 @@ import com.atom.dalgen.utils.LogUtils;
  */
 public class SqlParser {
     /** the sql statement to be parsed */
-    private String     sql;
+    private String sql;
 
     /** the parsed sql statement */
     private ZStatement zst;
 
     /** all parameters for this sql statement */
-    private List       params;
+    private List params;
 
     /**
      * Constructor for SqlParser.
@@ -74,8 +74,8 @@ public class SqlParser {
                 params.addAll(getParams(((ZDelete) zst).getWhere()));
             } else if (zst instanceof ZUpdate) {
                 // IMPORTANT: To ensure the corrent ordering of parameters,
-                //            we can't manipulate on ZUpdate.getSet() to extract
-                //            a list of parameters.
+                // we can't manipulate on ZUpdate.getSet() to extract
+                // a list of parameters.
                 int count = ((ZUpdate) zst).getColumnUpdateCount();
 
                 for (int i = 1; i <= count; i++) {
@@ -142,7 +142,7 @@ public class SqlParser {
         } else if (zst instanceof ZDelete) {
             tableName = ((ZDelete) zst).getTable();
 
-            // a delete statement 
+            // a delete statement
         } else if (zst instanceof ZInsert) {
             tableName = ((ZInsert) zst).getTable();
 
@@ -179,7 +179,7 @@ public class SqlParser {
                     LogUtils.get().debug("The type of the left constant is " + cl.getType());
 
                     if (cl.getType() == ZConstant.COLUMNNAME) {
-                        // TODO: an overly simplified approach, need more processing 
+                        // TODO: an overly simplified approach, need more processing
                         if (cr.toString().indexOf("?") >= 0) {
                             if (expression.getOperator().equalsIgnoreCase("in")) {
                                 params.add(cl.getValue() + "_list");

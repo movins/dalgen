@@ -9,6 +9,6 @@
 	<!-- <include table="tables/tts_product.xml" /> <include table="tables/tts_product_check.xml" 
 		/> <include table="tables/tts_meizhuang.xml" /> -->
 
-	<include table="tables/article.xml" />
+	<include table="tables/sys_config.xml" />
 
 </tables>

@@ -2,7 +2,7 @@
 
 <module>
 	<library version="1.0">
-	<class>
+	  <class>
       <path>alipay-thirdparty-dalgen-1.0.jar</path>
       <source-path>alipay-thirdparty-dalgen-1.0-src.jar</source-path>
       <documentation-path>alipay-thirdparty-dalgen-1.0-doc.jar</documentation-path>
@@ -15,7 +15,7 @@
     <required>jakarta/commons/digester</required>
     <required>jakarta/commons/lang</required>
     <required>jakarta/commons/logging</required>
-	<required>jakarta/commons/io</required>
+	  <required>jakarta/commons/io</required>
     <required>jdbc/oracle</required>
     <required>toolkit/common/lang?version=1.0</required>
     <required>alipay/thirdparty/zql</required>

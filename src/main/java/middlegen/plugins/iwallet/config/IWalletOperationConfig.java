@@ -11,7 +11,7 @@ import middlegen.plugins.iwallet.util.SqlParser;
 
 import org.apache.commons.lang.StringUtils;
 
-import Zql.ZStatement;
+import org.gibello.zql.ZStatement;
 
 import com.atom.dalgen.utils.LogUtils;
 
@@ -25,38 +25,40 @@ import com.atom.dalgen.utils.LogUtils;
  */
 public class IWalletOperationConfig {
 
-    public static final String       CDATA_START = "${cdata-start}";
-    public static final String       CDATA_END   = "${cdata-end}";
+    public static final String CDATA_START = "${cdata-start}";
+    public static final String CDATA_END = "${cdata-end}";
 
     /** the name (method name) of this operation */
-    private String                   name;
+    private String name;
 
     /** how to pass parameters to dao: primitive/object */
-    private String                   paramType;
+    private String paramType;
 
     /** the multiplicity of results: one/many */
-    private String                   multiplicity;
+    private String multiplicity;
 
-    private String                   count;
+    private String count;
 
-    private String                   parameterClass;
+    private String parameterClass;
 
     /** whether paging is needed */
-    private boolean                  paging;
+    private boolean paging;
 
-    /** the name of the resultMap, if null then use the table's default result map */
-    private String                   resultMap;
+    /**
+     * the name of the resultMap, if null then use the table's default result map
+     */
+    private String resultMap;
 
     /** the full qualified class name of the result class */
-    private String                   resultClass;
+    private String resultClass;
 
     /** the instance of the table configuration as container */
-    private IWalletTableConfig       tableConfig;
+    private IWalletTableConfig tableConfig;
 
     /** the parsed sql */
-    private SqlParser                sqlParser;
+    private SqlParser sqlParser;
 
-    private String                   append;
+    private String append;
 
     /** extra params */
     private List<IWalletParamConfig> extraParams = new ArrayList<IWalletParamConfig>();
@@ -68,17 +70,17 @@ public class IWalletOperationConfig {
      * Not all operations have explictly specified sql statement.
      * The sql statement for operations of some types may be
      * deducible from table meta data.
-     * */
-    private String                   sql;
+     */
+    private String sql;
 
     /**
      * the customized sqlmap mapped statement.
      */
-    private String                   sqlmap;
+    private String sqlmap;
 
-    //added by yangyanzhao 2010-02-08
+    // added by yangyanzhao 2010-02-08
     /** operation description */
-    private String                   description;
+    private String description;
 
     /**
      * Constructor for IWalletOperationConfig.
@@ -138,9 +140,10 @@ public class IWalletOperationConfig {
         StringBuffer sb = new StringBuffer();
 
         sb.append("[name=").append(name).append(", paramtype=").append(paramType).append(
-            ", multiplicity=").append(multiplicity).append(", parameterClass=").append(
-            parameterClass).append(", count=").append(count).append(", paging=").append(paging)
-            .append(", sql=").append(sql).append(", zstatement=").append(getZst()).append("]");
+                ", multiplicity=").append(multiplicity).append(", parameterClass=").append(
+                        parameterClass)
+                .append(", count=").append(count).append(", paging=").append(paging)
+                .append(", sql=").append(sql).append(", zstatement=").append(getZst()).append("]");
 
         return sb.toString();
     }

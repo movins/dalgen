@@ -75,15 +75,15 @@
 		<!-- ======================================== -->
 		<!-- JDBC相关依赖 -->
 		<!-- ======================================== -->
-		<dependency>
-			<groupId>zql</groupId>
-			<artifactId>zql</artifactId>
-			<version>1.0</version>
-		</dependency>
+		<!-- <dependency>
+			<groupId>azql</groupId>
+			<artifactId>azql</artifactId>
+			<version>0.2.0</version>
+		</dependency> -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.16</version>
+			<version>8.0.22</version>
 		</dependency>
 		<dependency>
 			<groupId>org.xerial</groupId>
@@ -186,4 +186,29 @@
 
 		</plugins>
 	</build>
+
+	<repositories>
+        <repository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

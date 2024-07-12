@@ -21,9 +21,9 @@
 	<property name="middlegen.package.dir" value="${target.middlegen.package.dir}" />
 
 	<!-- insert database configuration here -->
-	<property name="database.driver.file" value="${dir.lib}/mysql-connector-java-5.1.16.jar" />
+	<property name="database.driver.file" value="${dir.lib}/mysql-connector-java-8.0.22.jar" />
 	<property name="database.driver.classpath" value="${database.driver.file}" />
-	<property name="database.driver" value="com.mysql.jdbc.Driver" />
+	<property name="database.driver" value="com.mysql.cj.jdbc.Driver" />
 
 	<!-- classpath -->
 	<path id="classpath.main">

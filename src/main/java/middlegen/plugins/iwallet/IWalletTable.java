@@ -18,10 +18,10 @@ import org.apache.commons.lang.StringUtils;
 import com.atom.dalgen.utils.CfgUtils;
 import com.atom.dalgen.utils.LogUtils;
 
-import Zql.ZDelete;
-import Zql.ZInsert;
-import Zql.ZQuery;
-import Zql.ZUpdate;
+import org.gibello.zql.ZDelete;
+import org.gibello.zql.ZInsert;
+import org.gibello.zql.ZQuery;
+import org.gibello.zql.ZUpdate;
 import middlegen.Column;
 import middlegen.Plugin;
 import middlegen.Table;
@@ -588,7 +588,9 @@ public class IWalletTable extends JavaTable implements Comparable {
 		return (IWalletResultMap) resultMapIndex.get(id);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	@Override
